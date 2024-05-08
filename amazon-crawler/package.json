@@ -1,0 +1,15 @@
+{
+  "name": "amazon-crawler",
+  "version": "1.0.0",
+  "description": "crawles product data for Amazon",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "parv",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^22.8.0"
+  }
+}
