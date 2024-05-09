@@ -1,48 +1,40 @@
+import express from 'express';
 import { launch } from 'puppeteer';
-import { writeFileSync } from 'fs';
 import scrapeAmazon from './amazonScraper.js';
+import { retry } from './utils/retry.js';
 
-/**
- * Define search parameters
- * @type {string}
- */
-const searchPhrase = 'iphone 15 pro'; // Set your search phrase here
+const app = express();
+const PORT = process.env.CRAWLER_PORT || 8080;
 
-/**
- * Set the desired page to scrape to
- * @type {number}
- */
-const scrapeToPage = 1;
+app.use(express.json());
 
-/**
- * Function to run the scraping script
- */
-async function runScraping() {
+app.post('/scrape', async (req, res) => {
   try {
+    const { searchPhrase, scrapeToPage } = req.body;
+
+    if (!searchPhrase) {
+      return res.status(400).json({ error: 'Missing search parameters' });
+    }
+
     // Launch browser
-    const browser = await launch({
-      headless: true,
-      defaultViewport: null,
-    });
+    const browser = await launch({ headless: true, defaultViewport: null });
     const page = await browser.newPage();
 
     // Scrape Amazon
-    const scrapedData = await scrapeAmazon(page, searchPhrase, scrapeToPage);
-
-    // Log scraping finished
-    console.log('Scraping finished.');
-
-    // Save JSON to file
-    const outputFilename = 'scrapedData.json';
-    writeFileSync(outputFilename, JSON.stringify(scrapedData, null, 2), 'utf8');
-    console.log(`Data saved to ${outputFilename}`);
+    const scrapedData = await retry(async () => {
+      return await scrapeAmazon(page, searchPhrase, scrapeToPage || 1);
+    }, 3);
 
     // Close the browser
     await browser.close();
-  } catch (error) {
-    console.error('An error occurred:', error);
-  }
-}
 
-// Run the scraping function
-runScraping();
+    res.status(200).json({ message: 'Scraping successful', data: scrapedData });
+  } catch (error) {
+    console.error('An error occurred during scraping:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(` crawler server is running on http://localhost:${PORT}`);
+});
