@@ -20,7 +20,7 @@ app.post('/scrape', async (req, res) => {
     const page = await browser.newPage();
 
     // Get the appropriate scraper based on the website
-    const scraper = ScraperFactory.getScraper(website);
+    const scraper = ScraperFactory.createScraper(website);
 
     if (!scraper) {
       return res.status(400).json({ error: 'Unsupported website' });
