@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.model.js';
 import Config from '../config/config.js';
+import AuthManager from '../middlewares/auth.manager.js';
 
 class UserController {
   static async login(req, res) {
@@ -28,6 +29,9 @@ class UserController {
           expiresIn: '4h',
         }
       );
+
+      // Set credentials in AuthManager
+      AuthManager.getInstance().setToken(token);
 
       // Send token in response
       res.json({ token });

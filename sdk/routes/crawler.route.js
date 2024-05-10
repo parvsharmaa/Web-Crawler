@@ -9,11 +9,11 @@ class CrawlerRoutes {
   }
 
   setupRoutes() {
-    this.router.post(
-      '/',
-      AuthMiddleware.authenticateUser,
-      CrawlerController.scrape
-    );
+    // authenticate user before accessing routes
+    this.router.use(AuthMiddleware.authenticateUser);
+
+    this.router.post('/', CrawlerController.scrape);
+
     this.app.use('/crawl', this.router);
   }
 }

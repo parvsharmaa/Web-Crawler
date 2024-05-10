@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import AuthMiddleware from '../middlewares/auth.middleware.js';
 import ProductController from '../controllers/product.controller.js';
+import AuthMiddleware from '../middlewares/auth.middleware.js';
 
 class ProductRoutes {
   constructor(app) {
@@ -9,31 +9,19 @@ class ProductRoutes {
   }
 
   setupRoutes() {
-    this.router.get(
-      '/search',
-      AuthMiddleware.authenticateUser,
-      ProductController.searchProducts
-    );
-    this.router.get(
-      '/advance-search',
-      AuthMiddleware.authenticateUser,
-      ProductController.crawlSearch
-    );
-    this.router.get(
-      '/num-searches',
-      AuthMiddleware.authenticateUser,
-      ProductController.getNumberOfSearches
-    );
-    this.router.get(
-      '/recent-searches',
-      AuthMiddleware.authenticateUser,
-      ProductController.getRecentSearches
-    );
-    this.router.get(
-      '/most-searched',
-      AuthMiddleware.authenticateUser,
-      ProductController.getMostSearchedKeywords
-    );
+    // authenticate user before accessing routes
+    this.router.use(AuthMiddleware.authenticateUser);
+
+    this.router.get('/search', ProductController.searchProducts);
+
+    this.router.get('/advance-search', ProductController.crawlSearch);
+
+    this.router.get('/num-searches', ProductController.getNumberOfSearches);
+
+    this.router.get('/recent-searches', ProductController.getRecentSearches);
+
+    this.router.get('/most-searched', ProductController.getMostSearched);
+
     this.app.use('/products', this.router);
   }
 }

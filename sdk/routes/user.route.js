@@ -9,7 +9,9 @@ class UserRoutes {
 
   setupRoutes() {
     this.router.post('/login', UserController.login);
+
     this.router.post('/register', UserController.register);
+
     this.app.use('/auth', this.router);
   }
 }

@@ -24,7 +24,6 @@ class ProductController {
 
   static async crawlSearch(req, res) {
     try {
-
       // extract search query
       const searchTerm = req.query.q;
       const { userId } = req.user;
@@ -91,7 +90,7 @@ class ProductController {
     }
   }
 
-  static async getMostSearchedKeywords(req, res) {
+  static async getMostSearched(req, res) {
     try {
       // Limit to top 10 most searched keywords
       const mostSearchedKeywords = await Search.aggregate([
