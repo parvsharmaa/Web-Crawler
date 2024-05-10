@@ -1,6 +1,6 @@
 import express from 'express';
 import { launch } from 'puppeteer';
-import ScraperFactory from './scraperFactory.js';
+import ScraperFactory from './config/scraperFactory.js';
 
 const app = express();
 const PORT = process.env.CRAWLER_PORT || 8080;

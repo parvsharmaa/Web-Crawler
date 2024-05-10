@@ -1,6 +1,6 @@
-import ScraperInterface from './scraperInterface.js';
-import handleCookiesPopup from './utils/handleCookiesPopup.js';
-import { WEB_URL } from './utils/const.js';
+import ScraperInterface from '../config/scraperInterface.js';
+import handleCookiesPopup from '../utils/handleCookiesPopup.js';
+import { WEB_URL } from '../utils/const.js';
 
 class AmazonScraper extends ScraperInterface {
   async scrape(page, searchPhrase, scrapeToPage) {

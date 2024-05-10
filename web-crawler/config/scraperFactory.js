@@ -1,4 +1,4 @@
-import AmazonScraper from './amazonScraper.js';
+import AmazonScraper from '../web/amazonScraper.js';
 
 class ScraperFactory {
   static createScraper(website) {

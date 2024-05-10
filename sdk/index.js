@@ -1,6 +1,6 @@
 import express from 'express';
 import Database from './config/db.js';
-import SDK from './sdk.js';
+import SDK from './config/sdk.js';
 
 class MySDK {
   constructor() {

@@ -1,6 +1,6 @@
-import ProductRoutes from './routes/product.route.js';
-import UserRoutes from './routes/user.route.js';
-import CrawlerRoutes from './routes/crawler.route.js';
+import ProductRoutes from '../routes/product.route.js';
+import UserRoutes from '../routes/user.route.js';
+import CrawlerRoutes from '../routes/crawler.route.js';
 import express from 'express';
 
 class SDK {
