@@ -4,6 +4,7 @@ const productSchema = new Schema({
   productName: {
     type: String,
     required: true,
+    index: true, // index productName field for efficient searches
   },
   badge: {
     type: String,
@@ -26,6 +27,8 @@ const productSchema = new Schema({
     type: String,
   },
 });
+
+productSchema.index({ productName: 'text' });
 
 const Product = model('Product', productSchema);
 

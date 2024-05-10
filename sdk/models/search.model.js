@@ -4,6 +4,7 @@ const searchSchema = new Schema({
   query: {
     type: String,
     required: true,
+    index: true, // index query field for efficient searches
   },
   userId: {
     type: String,
@@ -14,6 +15,8 @@ const searchSchema = new Schema({
     default: Date.now,
   },
 });
+
+searchSchema.index({ query: 'text' });
 
 const Search = model('Search', searchSchema);
 
