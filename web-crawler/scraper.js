@@ -1,7 +1,6 @@
 import express from 'express';
 import { launch } from 'puppeteer';
-import scrapeAmazon from './amazonScraper.js';
-import { retry } from './utils/retry.js';
+import ScraperFactory from './scraperFactory.js';
 
 const app = express();
 const PORT = process.env.CRAWLER_PORT || 8080;
@@ -10,20 +9,25 @@ app.use(express.json());
 
 app.post('/scrape', async (req, res) => {
   try {
-    const { searchPhrase, scrapeToPage } = req.body;
+    const { website, searchPhrase, scrapeToPage } = req.body;
 
-    if (!searchPhrase) {
-      return res.status(400).json({ error: 'Missing search parameters' });
+    if (!website || !searchPhrase) {
+      return res.status(400).json({ error: 'Missing parameters' });
     }
 
     // Launch browser
     const browser = await launch({ headless: true, defaultViewport: null });
     const page = await browser.newPage();
 
-    // Scrape Amazon
-    const scrapedData = await retry(async () => {
-      return await scrapeAmazon(page, searchPhrase, scrapeToPage || 1);
-    }, 3);
+    // Get the appropriate scraper based on the website
+    const scraper = ScraperFactory.getScraper(website);
+
+    if (!scraper) {
+      return res.status(400).json({ error: 'Unsupported website' });
+    }
+
+    // Scrape data using the scraper
+    const scrapedData = await scraper.scrape(page, searchPhrase, scrapeToPage);
 
     // Close the browser
     await browser.close();
@@ -36,5 +40,5 @@ app.post('/scrape', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(` crawler server is running on http://localhost:${PORT}`);
+  console.log(`Crawler server is running on http://localhost:${PORT}`);
 });
