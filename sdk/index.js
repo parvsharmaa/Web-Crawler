@@ -1,24 +1,24 @@
 import express from 'express';
-import connectToDatabase from './config/db.js';
-import productRoutes from './routes/product.route.js';
-import userRoutes from './routes/user.route.js';
-import crawlerRoutes from './routes/crawler.route.js';
+import Database from './config/db.js';
+import SDK from './sdk.js';
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+class MySDK {
+  constructor() {
+    this.app = express();
+    this.PORT = process.env.PORT || 3000;
 
-// Connect to MongoDB
-connectToDatabase();
+    // Connect to MongoDB
+    Database.connectToDatabase();
 
-// Middleware
-app.use(express.json());
+    // Initialize SDK
+    this.setupSDK();
+  }
 
-// Routes
-app.use('/auth', userRoutes);
-app.use('/products', productRoutes);
-app.use('/crawl', crawlerRoutes);
+  setupSDK() {
+    const sdk = new SDK(this.app);
+    sdk.setupRoutes();
+    sdk.startServer(this.PORT);
+  }
+}
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+new MySDK();
