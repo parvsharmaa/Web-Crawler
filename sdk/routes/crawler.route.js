@@ -1,9 +1,21 @@
 import { Router } from 'express';
-import { scrape } from '../controllers/crawler.controller.js';
-import { authenticateUser } from '../middlewares/auth.middleware.js';
+import CrawlerController from '../controllers/crawler.controller.js';
+import AuthMiddleware from '../middlewares/auth.middleware.js';
 
-const router = Router();
+class CrawlerRoutes {
+  constructor(app) {
+    this.router = Router();
+    this.app = app;
+  }
 
-router.post('/', authenticateUser, scrape);
+  setupRoutes() {
+    this.router.post(
+      '/',
+      AuthMiddleware.authenticateUser,
+      CrawlerController.scrape
+    );
+    this.app.use('/crawl', this.router);
+  }
+}
 
-export default router;
+export default CrawlerRoutes;
