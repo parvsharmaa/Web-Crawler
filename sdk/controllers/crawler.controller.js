@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { CRAWLER_API } from '../config/config.js';
 import Product from '../models/product.model.js';
+import { WEBSITES } from '../utils/const.js';
 
 async function scrape(req, res) {
   try {
     const searchPhrase = req.body.searchTerm;
     const scrapeToPage = req.body.scrapeToPage || 1;
+    const website = WEBSITES.AMAZON;
 
     if (!searchPhrase) {
       return res.status(400).json({ error: 'search not provided' });
@@ -14,6 +16,7 @@ async function scrape(req, res) {
     console.log('Scrapping the data from crawler...');
     // Make a POST request to the web crawler service
     const response = await axios.post(CRAWLER_API, {
+      website,
       searchPhrase,
       scrapeToPage,
     });
