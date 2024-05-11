@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "0795d9b7-a1a4-447b-88ab-75bc45f6fe1c",
+		"name": "sdk",
+		"description": "This SDK provides functionalities for authentication, search, and data retrieval",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18444869"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"<YOUR_EMAIL>\",\n    \"password\": \"<YOUR_PASSWORD>\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "Registers a new user to the sdk."
+			},
+			"response": []
+		},
+		{
+			"name": "Login (Initailize SDK)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"<YOUR_EMAIL>\",\n    \"password\": \"<YOUR_PASSWORD>\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "Initializes the SDK and provides authentication token to access SDK routes."
+			},
+			"response": []
+		},
+		{
+			"name": "Search Keyword",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/search?q=iphone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "iphone"
+						}
+					]
+				},
+				"description": "Searches the provided keyword in the database.\n\n**Note:** User must be authenticated before calling this method."
+			},
+			"response": []
+		},
+		{
+			"name": "Number of Searches by User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/num-searches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"num-searches"
+					]
+				},
+				"description": "Shows the number of Search hits by the user.  \n**Note:** User must be authenticated before calling this method."
+			},
+			"response": []
+		},
+		{
+			"name": "Recently Searched Keywords",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/recent-searches",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"recent-searches"
+					]
+				},
+				"description": "Returns a list of upto 10 recent Search object made by the user.\n\n**Note:** User must be authenticated before calling this method."
+			},
+			"response": []
+		},
+		{
+			"name": "Most Searched Keywords",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/most-searched",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"most-searched"
+					]
+				},
+				"description": "Returns the most searched keyword object by the user.  \n**Note:** User must be authenticated before calling this method."
+			},
+			"response": []
+		},
+		{
+			"name": "Advanced Search",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products/advance-search?q=iphone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"advance-search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "iphone"
+						}
+					]
+				},
+				"description": "Searches keyword in db and if not found scrapes data from crawler, stores results in DB.\n\n**Note:** User must be authenticated before calling this method."
+			},
+			"response": []
+		},
+		{
+			"name": "Crawl from Web",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"searchPhrase\" : \"iphone\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/products/crawl",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"crawl"
+					]
+				},
+				"description": "Scrapes the data from website for a particular search phase, stores and returns products list .  \n**Note:** User must be authenticated before calling this method."
+			},
+			"response": []
+		}
+	]
+}

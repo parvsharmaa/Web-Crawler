@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "8b0095d2-bf4b-446f-8dcb-b4699c201cdb",
+		"name": "web-crawler",
+		"description": "A Website Crawler to scrape e-commerce sites",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18444869"
+	},
+	"item": [
+		{
+			"name": "Scrape Website",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"website\": \"amazon\",\n    \"searchPhrase\": \"iphone\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/scrape",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"scrape"
+					]
+				},
+				"description": "Scrapes the data from website for a particular search phase and returns the products list.  \nThis web crawler is treated as a unique **micoservice**, whose only responsiblity is to scrape the data for a particular keyword and return the fetched data in response."
+			},
+			"response": []
+		}
+	]
+}

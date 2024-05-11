@@ -68,7 +68,20 @@ The SDK provides a convenient interface for developers to access the data collec
 ### Note : 
 After successfully running the services, you can access the servers on Port numbers 3000 (for sdk) and 8080 (for web-crawler) respectively.
 
-## POSTMAN Api Documentation
+## Postman (Collection + Documentation)
+
+### Web Crawler : 
+
+- For Documentation : https://documenter.getpostman.com/view/18444869/2sA3JM8hCZ
+- For Postman Collection refer file : web-crawler.postman_collection.json
+
+### SDK : 
+
+- For Documentation : https://documenter.getpostman.com/view/18444869/2sA3JM8hCa
+- For Postman Collection refer file : sdk.postman_collection.json
+
+
+## Exposed Routes
 
 ### Web Crawler
 
@@ -115,7 +128,7 @@ After successfully running the services, you can access the servers on Port numb
 
 - `/products/most-searched` (GET) : Returns the most searched keyword object by the user.
 
-    Ideal Response: `{ mostSearchedKeywords: { query : <SEARCH_KEYWORD>}, ... }`
+    Ideal Response: `{ mostSearchedKeywords: { query : <SEARCH_KEYWORD> }, ... }`
     Note: User must be authenticated before calling this method.
 
 - `/products/advance-search` (GET) : Searches keyword in db and if not found scrapes data from crawler, stores results in DB. Expects 1 query parameter :
