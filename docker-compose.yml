@@ -1,0 +1,10 @@
+services:
+  sdk:
+    image: parvsharmaa/sdk-node:latest
+    ports:
+      - '3000:3000'
+
+  web-crawler:
+    image: parvsharmaa/web-crawler:latest
+    ports:
+      - '8080:8080'
