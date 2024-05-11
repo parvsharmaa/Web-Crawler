@@ -1,4 +1,4 @@
-### LYNC Backend Developer Task
+# LYNC Backend Developer Task
 
 This project is based on Micro Service Architure which includes a web crawler and SDK designed to retrieve and access data from the internet.
 
@@ -6,7 +6,7 @@ This project is based on Micro Service Architure which includes a web crawler an
 
 The Web Crawler is a microservice responsible for searching the internet and collecting products data from various e-commerce sources. It performs web scraping operations to extract relevant information and returns the data for further processing. The Web Crawler is designed to be scalable and efficient, capable of handling multiple concurrent requests.
 
-# Web Crawler implements Factory Design Pattern to ensure :
+###  Web Crawler implements Factory Design Pattern to ensure :
 
 1. Dynamic Object Creation: The factory pattern allows for the dynamic creation of different types of web crawlers based on specific requirements or configurations.
 2. Encapsulation: By encapsulating the object creation logic within the factory class, we can abstract away the details of the crawler's instantiation process from the client code.
@@ -14,7 +14,7 @@ The Web Crawler is a microservice responsible for searching the internet and col
 4. Configuration Management: It facilitates the management of different configurations or settings for each type of web crawler, making it easier to maintain and update.
 5. Dependency Injection: The factory pattern promotes dependency injection, allowing the client code to interact with the web crawler interface rather than directly with concrete implementations, thus improving modularity and testability.
 
-# Features
+### Features
 
 - Microservice solely focused on extracting the data
 - Searches the internet for data
@@ -26,7 +26,7 @@ The Web Crawler is a microservice responsible for searching the internet and col
 
 The SDK provides a convenient interface for developers to access the data collected by the Web Crawler. It exposes methods for retrieving search results, analyzing trends, and accessing other relevant information stored in the database. The SDK is designed to be user-friendly and easy to integrate into existing applications.
 
-# SDK implements Singleton Design Pattern to ensure :
+### SDK implements Singleton Design Pattern to ensure :
 
 1. Global Access: The singleton pattern ensures that there is only one instance of the SDK class throughout the application's lifecycle, providing global access to its methods and properties.
 2. Resource Management: Since the SDK may involve resource-intensive operations or maintain global state (such as authentication tokens), using a singleton ensures efficient resource utilization and avoids unnecessary duplication.
@@ -34,7 +34,7 @@ The SDK provides a convenient interface for developers to access the data collec
 4. Initialization Control: The singleton pattern allows us to control the initialization process of the SDK, ensuring that it is properly configured and ready for use before being accessed by other components.
 5. Concurrency Control: In multi-threaded environments, the singleton pattern provides a mechanism for thread-safe access to shared resources, preventing race conditions and ensuring data integrity.
 
-# Features
+### Features
 
 - Provides methods for accessing search results within the Database.
 - Analyzes trends and patterns in the collected data.
@@ -47,7 +47,7 @@ The SDK provides a convenient interface for developers to access the data collec
 
 ## Installation and Setup
 
-# To use the Web Crawler and SDK via Docker Compose, follow these steps:
+### To use the Web Crawler and SDK via Docker Compose, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Install Docker and Docker Compose if you haven't already.
@@ -57,7 +57,7 @@ The SDK provides a convenient interface for developers to access the data collec
 6. Run `docker-compose up` to start the services.
 7. At last, Run `docker-compose-down` to stop and remove the container services.
 
-# To run the developed system using Docker Hub, you can use the following commands
+### To run the developed system using Docker Hub, you can use the following commands
 
 1. For Web Crawler -
    Run `docker run -d -p 8080:8080 parvsharmaa/web-crawler:latest`
@@ -65,12 +65,12 @@ The SDK provides a convenient interface for developers to access the data collec
 2. For SDK -
    Run `docker run -d -p 3000:3000 parvsharmaa/sdk-node:latest`
 
-# Note : 
+### Note : 
 After successfully running the services, you can access the servers on Port numbers 3000 (for sdk) and 8080 (for web-crawler) respectively.
 
 ## POSTMAN Api Documentation
 
-# Web Crawler
+### Web Crawler
 
 - `/scrape` (POST) : Scrapes the data from website for a particular search phase and returns the products list . Expects 3 body parameters :
 
@@ -80,7 +80,7 @@ After successfully running the services, you can access the servers on Port numb
     
     Ideal Response: `{ message: "Scraping successful", data: [ ...productsList ]}`
 
-# SDK
+### SDK
 
 - `/auth/register` (POST) : Registers a new user to the sdk. Expects 2 body parameters :
 
