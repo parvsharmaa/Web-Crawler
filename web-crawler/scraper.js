@@ -15,8 +15,16 @@ app.post('/scrape', async (req, res) => {
       return res.status(400).json({ error: 'Missing parameters' });
     }
 
+    // Set default value for scrapeToPage if not provided
+    const pageToScrape = scrapeToPage || 1;
+
     // Launch browser
-    const browser = await launch({ headless: true, defaultViewport: null });
+    const browser = await launch({
+      headless: true,
+      defaultViewport: null,
+      executablePath: '/usr/bin/google-chrome',
+      args: ['--no-sandbox'],
+    });
     const page = await browser.newPage();
 
     // Get the appropriate scraper based on the website
@@ -27,7 +35,7 @@ app.post('/scrape', async (req, res) => {
     }
 
     // Scrape data using the scraper
-    const scrapedData = await scraper.scrape(page, searchPhrase, scrapeToPage);
+    const scrapedData = await scraper.scrape(page, searchPhrase, pageToScrape);
 
     // Close the browser
     await browser.close();
