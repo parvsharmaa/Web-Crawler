@@ -6,7 +6,7 @@ This project is based on Micro Service Architure which includes a web crawler an
 
 The Web Crawler is a microservice responsible for searching the internet and collecting products data from various e-commerce sources. It performs web scraping operations to extract relevant information and returns the data for further processing. The Web Crawler is designed to be scalable and efficient, capable of handling multiple concurrent requests.
 
-###  Web Crawler implements Factory Design Pattern to ensure :
+###  Web Crawler implements *Factory Design Pattern* to ensure :
 
 1. Dynamic Object Creation: The factory pattern allows for the dynamic creation of different types of web crawlers based on specific requirements or configurations.
 2. Encapsulation: By encapsulating the object creation logic within the factory class, we can abstract away the details of the crawler's instantiation process from the client code.
@@ -26,7 +26,7 @@ The Web Crawler is a microservice responsible for searching the internet and col
 
 The SDK provides a convenient interface for developers to access the data collected by the Web Crawler. It exposes methods for retrieving search results, analyzing trends, and accessing other relevant information stored in the database. The SDK is designed to be user-friendly and easy to integrate into existing applications.
 
-### SDK implements Singleton Design Pattern to ensure :
+### SDK implements *Singleton Design Pattern* to ensure :
 
 1. Global Access: The singleton pattern ensures that there is only one instance of the SDK class throughout the application's lifecycle, providing global access to its methods and properties.
 2. Resource Management: Since the SDK may involve resource-intensive operations or maintain global state (such as authentication tokens), using a singleton ensures efficient resource utilization and avoids unnecessary duplication.
@@ -50,14 +50,14 @@ The SDK provides a convenient interface for developers to access the data collec
 ### To use the Web Crawler and SDK via Docker Compose, follow these steps:
 
 1. Clone the repository to your local machine.
-2. Install Docker and Docker Compose if you haven't already.
-3. Build the Docker images for the Web Crawler and SDK using the provided Dockerfiles.
-4. Push the Docker images to Docker Hub or any other container registry.
-5. Update the `docker-compose.yml` file with the appropriate image names and tags.
-6. Run `docker-compose up` to start the services.
-7. At last, Run `docker-compose-down` to stop and remove the container services.
+2. Install Docker and Docker Desktop if you haven't already.
+3. Build the Docker images for the Web Crawler and SDK using the provided Dockerfiles within sub-directories.
+5. cd into the root directory of the project i.e. `LYNC-Backend-Developer-Task`
+6. Run `docker-compose up` to start the services and the two servers.
+7. Access both web crawler (on port 8080) and sdk (on port 3000) using api routes.
+8. At last, Run `docker-compose-down` to stop and remove the container services.
 
-### To run the developed system using Docker Hub, you can use the following commands
+### To run Docker Images using Docker Hub, you can use the following commands
 
 1. For Web Crawler -
    Run `docker run -d -p 8080:8080 parvsharmaa/web-crawler:latest`
