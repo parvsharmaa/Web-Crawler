@@ -1,5 +1,3 @@
-# LYNC Backend Developer Task
-
 This project is based on Micro Service Architure which includes a web crawler and SDK designed to retrieve and access data from the internet.
 
 ## Web Crawler
